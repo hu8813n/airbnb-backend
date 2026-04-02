@@ -29,3 +29,4 @@ export async function getHotelById(hotelId: number) {
     return hotel;
 }
 
+

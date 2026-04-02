@@ -27,7 +27,30 @@ const getHotelByIdHandler = async (req: Request, res: Response, next : NextFunct
     });
 }
 
+const  getAllHotelsHandler = async (req: Request, res: Response, next : NextFunction) => {
+    // This handler can be implemented to fetch and return all hotels.
+    // For now, it's just a placeholder.
+    res.status(501);
+} 
+
+const deleteHotelHandler = async (req: Request, res: Response, next : NextFunction) => {
+    // This handler can be implemented to delete a hotel by its ID.
+    // For now, it's just a placeholder.
+    res.status(501);
+}
+
+const updateHotelHandler = async (req: Request, res: Response, next : NextFunction) => {
+    // This handler can be implemented to update a hotel by its ID.
+    // For now, it's just a placeholder.
+    res.status(501);
+}
+
+
+
 export {
     createHotelHandler,
-    getHotelByIdHandler
+    getHotelByIdHandler,
+    getAllHotelsHandler,
+    deleteHotelHandler,
+    updateHotelHandler
 }
