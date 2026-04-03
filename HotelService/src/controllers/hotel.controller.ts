@@ -41,10 +41,11 @@ const  getAllHotelsHandler = async (req: Request, res: Response, next : NextFunc
 const deleteHotelHandler = async (req: Request, res: Response, next : NextFunction) => {
     // This handler can be implemented to delete a hotel by its ID.
     // For now, it's just a placeholder.
-     await deleteHotelService(Number(req.params.id));
+     const hotel = await deleteHotelService(Number(req.params.id));
     res.status(StatusCodes.OK).json({  
         success: true,       
-        message: 'Hotel deleted successfully'
+        message: 'Hotel deleted successfully',
+        data: hotel
     });
 }
 

@@ -1,6 +1,6 @@
 
 import { createHotelDTO, UpdateHotelDTO } from "../dto/hotel.dto";
-import { createHotel, getAllHotels, getHotelById, updateHotel } from "../repository/hotel.repository";
+import { createHotel, getAllHotels, getHotelById, softDeleteHotel, updateHotel } from "../repository/hotel.repository";
 import logger from "../config/logger.config";
 
 const createHotelService = async (hotelData: createHotelDTO) => {
@@ -27,7 +27,8 @@ const getAllHotelsService = async () => {
 const deleteHotelService = async (hotelId: number) => {
 
     logger.info(`Attempting to delete hotel with ID: ${hotelId}`);
-    await getHotelById(hotelId); // Check if the hotel exists before attempting to delete
+    const hotel = await softDeleteHotel(hotelId); // Check if the hotel exists before attempting to delete
+    return hotel;
 }
 
 const updateHotelService = async (hotelId: number, data: UpdateHotelDTO) => {
