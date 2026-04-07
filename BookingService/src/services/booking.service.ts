@@ -1,5 +1,5 @@
 import { CreateBookingDTO } from "../dto/booking.dto";
-import { confirmBooking, createBooking, createIdempotencyKey, finalizeIdempotencyKey, getIdempotencyKey } from "../repositories/booking.repository";
+import { confirmBooking, createBooking, createIdempotencyKey, finalizeIdempotencyKey, getIdempotencyKeyData } from "../repositories/booking.repository";
 import { BadRequestError, NotFoundError } from "../utils/errors/app.error";
 import { generateIdempotencyKey } from "../utils/helpers/idempotent.helper";
 
@@ -23,8 +23,8 @@ export async function CreateBookingService(bookingData: CreateBookingDTO) {
     };
 }
 
-export async function finalizeBookingService(idempotencyKey: string) {
-  const idempotencyKeyData = await getIdempotencyKey(idempotencyKey);
+export async function confirmBookingService(idempotencyKey: string) {
+  const idempotencyKeyData = await getIdempotencyKeyData(idempotencyKey);
 
   if(!idempotencyKeyData) {
     throw new NotFoundError("Idempotency key not found");
