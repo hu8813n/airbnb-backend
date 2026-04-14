@@ -4,6 +4,8 @@ import { MAILER_QUEUE } from "../queues/mailer.queue";
 import { getRedisConnObject } from "../config/redis.config";
 import { MAILER_PAYLOAD } from "../producers/email.producer";
 import logger from "../config/logger.config";
+import { sendEmail } from "../services/email.service";
+import { renderMailTemplate } from "../template/templates.handler";
 
 export const setupMailerWorker = () => {
 
@@ -19,9 +21,9 @@ export const setupMailerWorker = () => {
             const payload = job.data;
             console.log(`Processing email for: ${JSON.stringify(payload)}`);
 
-            // const emailContent = await renderMailTemplate(payload.templateId, payload.params);
+            const emailContent = await renderMailTemplate(payload.templateId, payload.params);
 
-            // await sendEmail(payload.to, payload.subject, emailContent);
+            await sendEmail(payload.to, payload.subject, emailContent);
 
             logger.info(`Email sent to ${payload.to} with subject "${payload.subject}"`);
 

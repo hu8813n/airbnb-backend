@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome</title>
+</head>
+
+<body style="margin:0; padding:0; background-color:#f4f6f8; font-family:Arial, sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f8; padding:20px 0;">
+    <tr>
+      <td align="center">
+
+        <!-- Main Container -->
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:#4f46e5; padding:20px; text-align:center; color:#ffffff;">
+              <h1 style="margin:0; font-size:24px;">Welcome to {{appName}}</h1>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:30px; color:#333;">
+              
+              <p style="font-size:16px; margin:0 0 15px;">
+                Hi <strong>{{name}}</strong>,
+              </p>
+
+              <p style="font-size:15px; margin:0 0 15px;">
+                We're excited to have you on board 🎉
+              </p>
+
+              <p style="font-size:15px; margin:0 0 20px;">
+                Your account has been successfully created. You can now explore the platform and start using all the features available.
+              </p>
+
+              <!-- CTA Button -->
+              <table cellpadding="0" cellspacing="0" style="margin:20px 0;">
+                <tr>
+                  <td align="center">
+                    <a href="{{appUrl}}" 
+                       style="background:#4f46e5; color:#ffffff; padding:12px 20px; text-decoration:none; border-radius:5px; font-size:14px; display:inline-block;">
+                      Get Started
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="font-size:14px; margin:0 0 15px; color:#555;">
+                If you have any questions or need help, feel free to reach out to our support team.
+              </p>
+
+              <p style="font-size:14px; margin-top:30px;">
+                Best regards,<br/>
+                <strong>Abutalib Hussain</strong>
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background:#f9fafb; padding:15px; text-align:center; font-size:12px; color:#888;">
+              © {{year}} {{appName}}. All rights reserved.
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
