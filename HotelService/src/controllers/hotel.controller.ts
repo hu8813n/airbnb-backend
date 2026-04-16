@@ -1,6 +1,6 @@
 import {StatusCodes} from  "http-status-codes";
 import { NextFunction, Request, Response } from "express";
-import { createHotelService, deleteHotelService, getAllHotelsService, getHotelByIdService, updateHotelService } from "../services/hotel.service";
+import { createHotelService, deleteHotelService, getAllHotelsService, getHotelByIdService, updateHotelService,  } from "../services/hotel.service";
 import { createHotelDTO, UpdateHotelDTO } from "../dto/hotel.dto";
 
 
