@@ -7,10 +7,10 @@ import (
 
 func main() {
 
-	cfg := app.NewConfig(":8080")
+	cfg := app.NewConfig()
 	app := app.NewApplication(cfg)
 
-	fmt.Println("Starting server at port: ", cfg.Addr)
+	fmt.Println("Starting server at port", cfg.Addr)
 	app.Run()
 
 }
