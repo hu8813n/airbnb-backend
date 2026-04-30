@@ -8,6 +8,7 @@ import (
 
 type Router interface {
 	Register(r chi.Router)
+	FindUserById(r chi.Router)
 }
 
 type UserRouter struct {
@@ -22,4 +23,8 @@ func NewUserRouter(_userController *controller.UserController) Router {
 
 func (ur *UserRouter) Register(r chi.Router) {
 	r.Post("/signup", ur.UserController.RegisterUser)
+}
+
+func (ur *UserRouter) FindUserById(r chi.Router) {
+	r.Get("/user/{id}", ur.UserController.GetUserById)
 }

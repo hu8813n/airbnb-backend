@@ -21,3 +21,9 @@ func (uc *UserController) RegisterUser(w http.ResponseWriter, r *http.Request) {
 
 	w.Write([]byte("User Registeration Endpoint"))
 }
+
+func (uc *UserController) GetUserById(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+	uc.UserService.GetUserByIdService(id) //
+	w.Write([]byte("User Retireived Succesfully"))
+}

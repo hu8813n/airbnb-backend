@@ -7,6 +7,7 @@ import (
 
 type UserService interface {
 	CreateUser() error
+	GetUserByIdService(_id string) error
 }
 
 // UserService is not directly dependent on the UserRepository, but it is injected with an interface that defines the methods it needs.
@@ -31,5 +32,11 @@ func NewUserService(_userRepository db.UserRepository) UserService {
 func (u *UserServiceImpl) CreateUser() error {
 	fmt.Println("Creating user in the service layer")
 	u.userRepository.Create() // call the create method of the repository to create a user in the database
+	return nil
+}
+
+func (u *UserServiceImpl) GetUserByIdService(_id string) error {
+	fmt.Println("fetching user by id in the service layer")
+	u.userRepository.GetUserById(_id)
 	return nil
 }

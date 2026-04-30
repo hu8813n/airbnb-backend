@@ -41,3 +41,5 @@ func SetupDB() (*sql.DB, error) {
 
 	return db, nil
 }
+
+//Task : try to make db queries
