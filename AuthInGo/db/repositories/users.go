@@ -7,8 +7,10 @@ import (
 )
 
 type UserRepository interface {
-	Create() error
-	GetUserById(_id string) error
+	Create() (*models.User, error)
+	GetUserById(_id string) (*models.User, error)
+	GetAll() ([]models.User, error)
+	DeleteById(_id int64) error
 }
 
 type UserRepositoryImpl struct {
@@ -22,31 +24,47 @@ func NewUserRepository(_db *sql.DB) UserRepository {
 	}
 }
 
-func (u *UserRepositoryImpl) Create() error {
+func (u *UserRepositoryImpl) Create() (*models.User, error) {
 	// fmt.Println("Creating user in the repository layer")
-	// query := `INSERT INTO users (username ,email, password) VALUES ("athoak", "ath.oak20@gmail.com", "hussien")`
-	// err := u.db.QueryRow(query)
+	query := `INSERT INTO users (username ,email, password) VALUES (?, ?, ?)`
+	result, err := u.db.Exec(query, "testuser", "test@test.com", "123456")
 
-	// if err != nil {
-	// 	fmt.Println("Error Executing Query", err)
-	// }
-	return nil
+	if err != nil {
+		fmt.Println("Error Inserting user", err)
+		return nil, err
+	}
+
+	rowsAffected, rowErr := result.RowsAffected()
+
+	if rowErr != nil {
+		fmt.Println("Error getting rows afffected", rowErr)
+		return nil, rowErr
+	}
+
+	if rowsAffected == 0 {
+		fmt.Println("No rows affected, User Not created")
+		return nil, nil
+	}
+
+	fmt.Println("User Created Successfully, rowsAffected:", rowsAffected)
+
+	return nil, nil
 
 }
 
-func (u *UserRepositoryImpl) GetUserById(_id string) error {
+func (u *UserRepositoryImpl) GetUserById(_id string) (*models.User, error) {
 
 	fmt.Println("fetching user by id in the repository layer of id", _id)
 
 	//Step 1 = Prepare the query
-	query := "SELECT id , username, email, password , created_at , updated_at FROM users WHERE id = ?"
+	query := "SELECT id , username, email, created_at , updated_at FROM users WHERE id = ?"
 
 	//Step 2 = Execute the query
 	row := u.db.QueryRow(query, _id)
 
 	//Step 3 = Process the result
 	user := &models.User{}
-	err := row.Scan(&user.Id, &user.Username, &user.Email, &user.Password, &user.CreatedAt, &user.UpdatedAt)
+	err := row.Scan(&user.Id, &user.Username, &user.Email, &user.CreatedAt, &user.UpdatedAt)
 
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -54,9 +72,20 @@ func (u *UserRepositoryImpl) GetUserById(_id string) error {
 		} else {
 			fmt.Println("Error scanning row", err)
 		}
-		return err
+		return nil, err
 	}
 
 	fmt.Println("User Fetched Successfully", user)
+	return user, nil
+}
+
+func (u *UserRepositoryImpl) GetAll() ([]models.User, error) {
+	//TODO implement me
+
+	return nil, nil
+}
+
+func (u *UserRepositoryImpl) DeleteById(_id int64) error {
+	//TODO implement me
 	return nil
 }
