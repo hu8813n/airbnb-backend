@@ -9,6 +9,7 @@ import (
 type Router interface {
 	Register(r chi.Router)
 	FindUserById(r chi.Router)
+	FindAllUsers(r chi.Router)
 }
 
 type UserRouter struct {
@@ -27,4 +28,8 @@ func (ur *UserRouter) Register(r chi.Router) {
 
 func (ur *UserRouter) FindUserById(r chi.Router) {
 	r.Get("/user/{id}", ur.UserController.GetUserById)
+}
+
+func (ur *UserRouter) FindAllUsers(r chi.Router) {
+	r.Get("/users", ur.UserController.GetAllUsers)
 }

@@ -80,9 +80,29 @@ func (u *UserRepositoryImpl) GetUserById(_id string) (*models.User, error) {
 }
 
 func (u *UserRepositoryImpl) GetAll() ([]models.User, error) {
-	//TODO implement me
 
-	return nil, nil
+	query := "SELECT id , username, email, created_at , updated_at FROM users"
+
+	rows, err := u.db.Query(query)
+
+	if err != nil {
+		fmt.Println("Error fetching users", err)
+		return nil, err
+	}
+
+	users := []models.User{}
+
+	for rows.Next() {
+		user := &models.User{}
+		if err := rows.Scan(&user.Id, &user.Username, &user.Email, &user.CreatedAt, &user.UpdatedAt); err != nil {
+			fmt.Println("Error scanning row", err)
+			return nil, err
+		}
+		users = append(users, *user)
+		fmt.Println("User Fetched Successfully", user)
+	}
+
+	return users, nil
 }
 
 func (u *UserRepositoryImpl) DeleteById(_id int64) error {

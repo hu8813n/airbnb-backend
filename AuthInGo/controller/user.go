@@ -2,6 +2,7 @@ package controller
 
 import (
 	"AuthInGo/services"
+	"encoding/json"
 	"net/http"
 )
 
@@ -26,4 +27,15 @@ func (uc *UserController) GetUserById(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	uc.UserService.GetUserByIdService(id) //
 	w.Write([]byte("User Retireived Succesfully"))
+}
+
+func (uc *UserController) GetAllUsers(w http.ResponseWriter, r *http.Request) {
+	users, err := uc.UserService.GetAllUserService()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(users)
 }

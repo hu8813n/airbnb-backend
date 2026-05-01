@@ -13,6 +13,7 @@ func SetupRouter(UserRouter Router) *chi.Mux {
 	chiRouter.Get("/ping", controller.PingHandler)
 	UserRouter.Register(chiRouter)
 	UserRouter.FindUserById(chiRouter)
+	UserRouter.FindAllUsers(chiRouter)
 
 	return chiRouter
 }

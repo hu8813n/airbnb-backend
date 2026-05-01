@@ -2,12 +2,14 @@ package services
 
 import (
 	db "AuthInGo/db/repositories"
+	"AuthInGo/models"
 	"fmt"
 )
 
 type UserService interface {
 	CreateUser() error
 	GetUserByIdService(_id string) error
+	GetAllUserService() ([]models.User, error)
 }
 
 // UserService is not directly dependent on the UserRepository, but it is injected with an interface that defines the methods it needs.
@@ -39,4 +41,15 @@ func (u *UserServiceImpl) GetUserByIdService(_id string) error {
 	fmt.Println("fetching user by id in the service layer")
 	u.userRepository.GetUserById(_id)
 	return nil
+}
+
+func (u *UserServiceImpl) GetAllUserService() ([]models.User, error) {
+	fmt.Println("fetching all users in the service layer")
+	users, err := u.userRepository.GetAll()
+
+	if err != nil {
+		fmt.Println("Error fetching users", err)
+		return nil, err
+	}
+	return users, nil
 }
