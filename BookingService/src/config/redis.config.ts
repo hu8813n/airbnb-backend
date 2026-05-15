@@ -6,12 +6,12 @@ console.log("Redis URL:", serverConfig.REDIS_SERVER_URL); // add this line
 
 
 // Initialize Redis client for connecting to the Redis server and handling all Redis operations
-export const redisClient = new IORedis(serverConfig.REDIS_SERVER_URL);
+export const redisClient: any = new IORedis(serverConfig.REDIS_SERVER_URL);
 
 
 redisClient.on("connect", () => console.log("✅ Redis connected"));
 redisClient.on("ready", () => console.log("✅ Redis ready"));
-redisClient.on("error", (err) => console.error("❌ Redis error:", err));
+redisClient.on("error", (err : any) => console.error("❌ Redis error:", err));
 redisClient.on("close", () => console.log("⚠️ Redis connection closed"));
 redisClient.on("reconnecting", () => console.log("🔄 Redis reconnecting..."));
 

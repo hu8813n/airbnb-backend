@@ -4,9 +4,12 @@ import { BadRequestError, NotFoundError } from "../utils/errors/app.error";
 import  { validate} from "uuid";
 
 export async function createBooking(bookingData: Prisma.BookingCreateInput) {
+  console.log("Creating booking with data:", bookingData);
   const booking = await prismaClient.booking.create({
     data: bookingData,
   });
+
+  console.log("Booking created:", booking);
 
   return booking;
 }

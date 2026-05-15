@@ -25,6 +25,7 @@ export async function CreateBookingService(createBookingDTO: CreateBookingDTO) {
 
   try {
     await redlock.acquire([bookingResource], ttl);
+    console.log("Ready to acquire lock for booking creation");
     const booking = await createBooking({
       userId: createBookingDTO.userId,
       hotelId: createBookingDTO.hotelId,
@@ -32,14 +33,18 @@ export async function CreateBookingService(createBookingDTO: CreateBookingDTO) {
       bookingAmount: createBookingDTO.bookingAmount,
     });
 
-    const idempotencyKey = await generateIdempotencyKey();
-    await createIdempotencyKey(idempotencyKey, booking.id);
+    console.log("Booking created with ID:", booking.id);
 
+    const idempotencyKey = await generateIdempotencyKey();
+    console.log("Generated idempotency key:", idempotencyKey);
+    await createIdempotencyKey(idempotencyKey, booking.id);
+    console.log("Idempotency key stored in database:", idempotencyKey);
     return {
       bookingId: booking.id,
       idempotencyKey: idempotencyKey,
     };
   } catch (error) {
+    console.error("Error during booking creation:", error);
     throw new InternalServerError(
       "Failed to acquire lock for booking creation",
     );
