@@ -1,31 +1,12 @@
-## Steps to setup the starter template
 
-1. Clone the project
+# Install Dependencies 
+''' npm install '''
 
-```
-git clone https://github.com/singhsanket143/Express-Typescript-Starter-Project.git <ProjectName>
-```
+# Setup .env files 
 
-2. Move in to the folder structure
+PORT=3002
+REDIS_HOST="localhost"
+REDIS_PORT= 6379
+MAIL_USER="ath.oak20@gmail.com"
+MAIL_PASS="App_Password_generate_on_gmail"
 
-```
-cd <ProjectName>
-```
-
-3. Install npm dependencies
-
-```
-npm i
-```
-
-4. Create a new .env file in the root directory and add the `PORT` env variable
-
-```
-echo PORT=3000 >> .env
-```
-
-5. Start the express server
-
-```
-npm run dev
-```
